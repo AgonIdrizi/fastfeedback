@@ -1,37 +1,33 @@
 import Head from 'next/head';
 import { useAuth } from '@/lib/auth';
 
-import Logo from '@/components/Icons/Logo';
-
-import styles from '@/styles/Home.module.css';
+import Logo from '@/components/UI/Icons/Logo';
 
 export default function Home() {
   const auth = useAuth();
 
   return (
-    <div className={styles.container}>
-      <main>
-        <Logo />
-        <h1 className="m-0 text-5xl">Fast feedback</h1>
-        <p className="text-2xl">
-          Current user: <code>{auth.user ? auth.user.email : null}</code>
-        </p>
-        {auth.user ? (
-          <button
-            className="bg-red-300 rounded-md p-2"
-            onClick={(e) => auth.signout()}
-          >
-            Sign out
-          </button>
-        ) : (
-          <button
-            className="bg-red-300 rounded-md p-2"
-            onClick={(e) => auth.signinWithGithub()}
-          >
-            Sign In
-          </button>
-        )}
-      </main>
-    </div>
+    <main className="flex flex-col items-center justify-center h-screen">
+      <Head>
+        <title>Fast Feedback</title>
+      </Head>
+      <Logo />
+      {auth.user ? (
+        <button
+          className="w-22 mt-4 rounded-md text-base font-medium text-gray-500 bg-gray-100 hover:bg-gray-200 px-4 py-2"
+          onClick={(e) => auth.signout()}
+        >
+          Sign out
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="w-22 mt-4 rounded-md text-base font-medium  text-gray-500 bg-gray-100 hover:bg-gray-200 px-4 py-2"
+          onClick={(e) => auth.signinWithGithub()}
+        >
+          Sign In
+        </button>
+      )}
+    </main>
   );
 }
