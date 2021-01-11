@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .h-60px {
+    height: 60px;
+  }
+}
+@layer utilities {
+  .max-w-1250px {
+    max-width: 1250px;
+  }
+}
+
+@layer utilities {
+  .app-bg {
+    background-color: #edf2f7;
+  }
+}
