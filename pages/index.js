@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useAuth } from '@/lib/auth';
+import Button, { BUTTON_CLASS_TYPES } from '@/components/UI/Button/Button';
 
 import Logo from '@/components/UI/Icons/Logo';
 
@@ -13,20 +14,19 @@ export default function Home() {
       </Head>
       <Logo />
       {auth.user ? (
-        <button
-          className="w-22 mt-4 rounded-md text-base font-medium text-gray-500 bg-gray-100 hover:bg-gray-200 px-4 py-2"
+        <Button
+          btnType={BUTTON_CLASS_TYPES.secondaryButton}
           onClick={(e) => auth.signout()}
         >
           Sign out
-        </button>
+        </Button>
       ) : (
-        <button
-          type="button"
-          className="w-22 mt-4 rounded-md text-base font-medium  text-gray-500 bg-gray-100 hover:bg-gray-200 px-4 py-2"
+        <Button
+          btnType={BUTTON_CLASS_TYPES.secondaryButton}
           onClick={(e) => auth.signinWithGithub()}
         >
           Sign In
-        </button>
+        </Button>
       )}
     </main>
   );
