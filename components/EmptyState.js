@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '@/components/UI/Card/Card';
 import Button, { BUTTON_CLASS_TYPES } from '@/components/UI/Button/Button';
 import Dashboard from './Dashboard';
+import AddSiteModal from '@/components/AddSiteModal';
 
 const EmptyState = () => {
   return (
@@ -11,9 +12,7 @@ const EmptyState = () => {
           You haven't added any sites.
         </h2>
         <p className="mb-4">Welcome, Let's get started</p>
-        <Button btnType={BUTTON_CLASS_TYPES.primaryButton}>
-          Add Your First Site
-        </Button>
+        <AddSiteModal>Add Your First Site</AddSiteModal>
       </Card>
     </Dashboard>
   );
