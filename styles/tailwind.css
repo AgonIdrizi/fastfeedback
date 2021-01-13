@@ -12,6 +12,11 @@
     max-width: 1250px;
   }
 }
+@layer utilities {
+  .modal-min-width {
+    min-width: 400px;
+  }
+}
 
 @layer utilities {
   .app-bg {
