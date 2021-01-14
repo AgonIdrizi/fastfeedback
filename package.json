@@ -10,11 +10,13 @@
   "dependencies": {
     "autoprefixer": "^10.2.1",
     "firebase": "^8.2.1",
+    "firebase-admin": "^9.4.2",
     "formik": "^2.2.6",
     "next": "10.0.0",
     "postcss": "^8.2.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-toast-notifications": "^2.4.0",
     "tailwindcss": "^2.0.2",
     "yup": "^0.32.8"
   }

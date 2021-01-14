@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.react-toast-notifications__container {
+  margin-top: 60px;
+}
