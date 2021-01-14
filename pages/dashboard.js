@@ -2,13 +2,23 @@ import React from 'react';
 import Header from '@/components/Header';
 import EmptyState from '@/components/EmptyState';
 import { useAuth } from '@/lib/auth';
+import Dashboard from '@/components/Dashboard';
+import SiteTableSkeleton from '@/components/SiteTableSkeleton';
 
 const dashboard = () => {
   const auth = useAuth();
   if (!auth.user) {
-    return 'Loading...';
+    return (
+      <Dashboard>
+        <SiteTableSkeleton />
+      </Dashboard>
+    );
   }
-  return <EmptyState />;
+  return (
+    <Dashboard>
+      <EmptyState />
+    </Dashboard>
+  );
 };
 
 export default dashboard;
