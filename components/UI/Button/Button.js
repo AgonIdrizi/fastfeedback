@@ -9,7 +9,7 @@ export const BUTTON_CLASS_TYPES = {
     'w-22 bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm mt-4  py-2 rounded shadow hover:shadow-lg  hover:bg-green-600 outline-none focus:outline-none '
 };
 
-const Button = ({ children, btnType, onClick }) => {
+const Button = ({ children, btnType, onClick, disabled = false }) => {
   return (
     <button
       type="button"

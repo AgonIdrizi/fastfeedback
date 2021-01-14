@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Formik, Form, Field, useFormik } from 'formik';
 import * as yup from 'yup';
+import { mutate } from 'swr';
 import { useToasts } from 'react-toast-notifications';
 import { createSite } from '@/lib/db';
 import { useAuth } from '@/lib/auth';
@@ -32,6 +33,7 @@ const AddSiteModal = ({ children }) => {
       site,
       url: link
     });
+    mutate('/api/sites');
     addToast('Site was added succesfully', {
       appearance: 'success',
       autoDismiss: true
