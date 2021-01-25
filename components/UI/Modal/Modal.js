@@ -10,6 +10,7 @@ export default function Modal({
   const handleOkModal = () => {
     formRef.current?.submitForm();
     setShowModal(false);
+    console.log(formRef.current);
   };
 
   //console.log(formRef.current?.submitForm());
@@ -46,6 +47,7 @@ export default function Modal({
                   <Button
                     btnType={BUTTON_CLASS_TYPES.successButton}
                     onClick={() => handleOkModal()}
+                    disabled={!formRef.current?.isValid}
                   >
                     Save
                   </Button>

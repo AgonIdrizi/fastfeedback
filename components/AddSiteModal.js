@@ -1,7 +1,11 @@
 import React, { useRef } from 'react';
 import { Formik, Form, Field, useFormik } from 'formik';
 import * as yup from 'yup';
+import { mutate } from 'swr';
+import { useMutation, useQueryClient } from 'react-query';
+import { useToasts } from 'react-toast-notifications';
 import { createSite } from '@/lib/db';
+import { useAuth } from '@/lib/auth';
 import Modal from '@/components/UI/Modal/Modal';
 import Button, { BUTTON_CLASS_TYPES } from '@/components/UI/Button/Button';
 import TextInput from '@/components/UI/TextInput/TextInput';
@@ -20,9 +24,38 @@ const schema = yup.object({
 
 const AddSiteModal = ({ children }) => {
   const [showModal, setShowModal] = React.useState(false);
+  const auth = useAuth();
+  const { addToast } = useToasts();
   const formRef = useRef();
-  const handleSubmitForm = (values) => {
-    createSite(values);
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    (createSiteData) => {
+      return createSite(createSiteData);
+    },
+    {
+      onSuccess: () => {
+        addToast('Site was added succesfully', {
+          appearance: 'success',
+          autoDismiss: true
+        });
+        queryClient.invalidateQueries('sites');
+      },
+      onError: () => {
+        addToast('Ops there was an error, try again', {
+          appearance: 'error',
+          autoDismiss: true
+        });
+      }
+    }
+  );
+
+  const handleSubmitForm = ({ site, link }) => {
+    mutation.mutateAsync({
+      authorId: auth.user?.uid,
+      createdAt: new Date().toISOString(),
+      site,
+      url: link
+    });
   };
   return (
     <>
