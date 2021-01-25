@@ -1,18 +1,16 @@
 import React from 'react';
 import useSWR from 'swr';
+import useSites from '@/hooks/useSites';
 import Header from '@/components/Header';
 import EmptyState from '@/components/EmptyState';
 import { useAuth } from '@/lib/auth';
 import Dashboard from '@/components/Dashboard';
 import SiteTableSkeleton from '@/components/SiteTableSkeleton';
-import fetcher from 'utils/fetcher';
 import SiteTable from '@/components/SiteTable';
 
 const dashboard = () => {
   const auth = useAuth();
-  const { data, error } = useSWR('/api/sites', fetcher);
-
-  console.log(data);
+  const { data, error } = useSites();
 
   if (!data) {
     return (
@@ -23,7 +21,7 @@ const dashboard = () => {
   }
   return (
     <Dashboard>
-      {data.sites ? <SiteTable sites={data.sites} /> : <EmptyState />}
+      {data.data.sites ? <SiteTable sites={data.data.sites} /> : <EmptyState />}
     </Dashboard>
   );
 };
