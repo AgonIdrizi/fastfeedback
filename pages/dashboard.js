@@ -4,26 +4,26 @@ import useSites from '@/hooks/useSites';
 import Header from '@/components/Header';
 import EmptyState from '@/components/EmptyState';
 import { useAuth } from '@/lib/auth';
-import Dashboard from '@/components/Dashboard';
+import DashboardShell from '@/components/DashboardShell';
 import SiteTableSkeleton from '@/components/SiteTableSkeleton';
 import SiteTable from '@/components/SiteTable';
 
-const dashboard = () => {
+const Dashboard = () => {
   const auth = useAuth();
   const { data, error } = useSites();
 
   if (!data) {
     return (
-      <Dashboard>
+      <DashboardShell>
         <SiteTableSkeleton />
-      </Dashboard>
+      </DashboardShell>
     );
   }
   return (
-    <Dashboard>
+    <DashboardShell>
       {data.data.sites ? <SiteTable sites={data.data.sites} /> : <EmptyState />}
-    </Dashboard>
+    </DashboardShell>
   );
 };
 
-export default dashboard;
+export default Dashboard;
