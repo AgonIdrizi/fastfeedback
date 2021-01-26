@@ -8,7 +8,7 @@ import Dashboard from '@/components/Dashboard';
 import SiteTableSkeleton from '@/components/SiteTableSkeleton';
 import SiteTable from '@/components/SiteTable';
 
-const dashboard = () => {
+const Dashboard = () => {
   const auth = useAuth();
   const { data, error } = useSites();
 
@@ -26,4 +26,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default Dashboard;
