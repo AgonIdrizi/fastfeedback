@@ -3,7 +3,7 @@ import Card from '@/components/UI/Card/Card';
 import Header from '@/components/Header';
 import AddSiteModal from './AddSiteModal';
 
-const Dashboard = ({ children }) => {
+const DashboardShell = ({ children }) => {
   return (
     <div className="bg-app-bg h-screen">
       <Header />
@@ -31,4 +31,4 @@ const Dashboard = ({ children }) => {
   );
 };
 
-export default Dashboard;
+export default DashboardShell;
