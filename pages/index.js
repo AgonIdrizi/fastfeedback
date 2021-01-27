@@ -15,14 +15,14 @@ export default function Home() {
       <Logo />
       {auth.user ? (
         <Button
-          btnType={BUTTON_CLASS_TYPES.secondaryButton}
+          btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
           onClick={(e) => auth.signout()}
         >
           Sign out
         </Button>
       ) : (
         <Button
-          btnType={BUTTON_CLASS_TYPES.secondaryButton}
+          btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
           onClick={(e) => auth.signinWithGithub()}
         >
           Sign In

@@ -17,7 +17,7 @@ const Header = () => {
         <div className="avatar flex">
           {user && (
             <Button
-              btnType={BUTTON_CLASS_TYPES.primary}
+              btnClassType={BUTTON_CLASS_TYPES.primary}
               onClick={() => signout()}
             >
               Log Out

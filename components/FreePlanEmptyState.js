@@ -1,11 +1,11 @@
 import React from 'react';
-import Dashboard from '@/components/Dashboard';
+import DashboardShell from '@/components/DashboardShell';
 import Card from './UI/Card/Card';
 import Button, { BUTTON_CLASS_TYPES } from './UI/Button/Button';
 
 const FreePlanEmptyState = () => {
   return (
-    <Dashboard>
+    <DashboardShell>
       <Card>
         <h2 className="text-2xl font-bold mb-0.5">
           Get feedback on your site instantly.
@@ -15,7 +15,7 @@ const FreePlanEmptyState = () => {
           Upgrade to Starter
         </Button>
       </Card>
-    </Dashboard>
+    </DashboardShell>
   );
 };
 

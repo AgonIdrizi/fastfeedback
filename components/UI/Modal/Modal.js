@@ -39,13 +39,13 @@ export default function Modal({
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t gap-4 border-solid border-gray-300 rounded-b">
                   <Button
-                    btnType={BUTTON_CLASS_TYPES.secondaryButton}
+                    btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
                     onClick={(e) => setShowModal(false)}
                   >
                     Cancel
                   </Button>
                   <Button
-                    btnType={BUTTON_CLASS_TYPES.successButton}
+                    btnClassType={BUTTON_CLASS_TYPES.successButton}
                     onClick={() => handleOkModal()}
                     disabled={!formRef.current?.isValid}
                   >
