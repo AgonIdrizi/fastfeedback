@@ -6,28 +6,29 @@ module.exports = {
       ...theme('colors'),
       'app-bg': '#edf2f7'
     }),
-    textColor: (theme) => theme('colors'),
-    textColor: {
-      primary: '#1a202c',
-      secondary: 'white',
-      'bt-white': 'white',
-      danger: '#e3342f'
-    },
-    minWidth: {
-      0: '0',
-      2: '2rem',
-      '1/4': '25%',
-      '1/2': '50%',
-      '3/4': '75%',
-      full: '100%'
-    },
-    maxWidth: {
-      16: '16rem',
-      '1/4': '25%',
-      '1/2': '50%',
-      '3/4': '75%'
-    },
-    extend: {}
+    extend: {
+      textColor: {
+        primary: '#1a202c',
+        secondary: 'white',
+        'bt-white': 'white',
+        ternary: 'gray',
+        danger: '#e3342f'
+      },
+      minWidth: {
+        0: '0',
+        2: '2rem',
+        '1/4': '25%',
+        '1/2': '50%',
+        '3/4': '75%',
+        full: '100%'
+      },
+      maxWidth: {
+        16: '16rem',
+        '1/4': '25%',
+        '1/2': '50%',
+        '3/4': '75%'
+      }
+    }
   },
   variants: {
     extend: {}

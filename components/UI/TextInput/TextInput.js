@@ -7,7 +7,7 @@ const TextInput = ({
   ...props
 }) => {
   return (
-    <div className="relative ">
+    <div className={`relative ${props.className}`}>
       <label htmlFor={field.name}>{capitalizeFirstLetter(field.name)}</label>
       <input
         type="text"

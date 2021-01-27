@@ -9,12 +9,19 @@ export const BUTTON_CLASS_TYPES = {
     'w-22 bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm mt-4  py-2 rounded shadow hover:shadow-lg  hover:bg-green-600 outline-none focus:outline-none '
 };
 
-const Button = ({ children, btnType, onClick, disabled = false }) => {
+const Button = ({
+  children,
+  btnClassType,
+  onClick,
+  disabled = false,
+  btnType = 'button'
+}) => {
   return (
     <button
-      type="button"
+      type={btnType}
       onClick={onClick}
-      className={` px-6 flex justify-center  items-center transition ease-in duration-200 ${btnType}`}
+      className={` px-6 flex justify-center  items-center transition ease-in duration-200 ${btnClassType}`}
+      disabled={disabled}
     >
       {children}
     </button>

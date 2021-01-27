@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '@/components/UI/Card/Card';
-import Button, { BUTTON_CLASS_TYPES } from '@/components/UI/Button/Button';
 
 import AddSiteModal from '@/components/AddSiteModal';
 import Table, { Td, Tr, Th, TdStatus, TdText } from './UI/Table/Table';

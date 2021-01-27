@@ -61,7 +61,7 @@ const AddSiteModal = ({ children }) => {
     <>
       <Button
         onClick={() => setShowModal(true)}
-        btnType={BUTTON_CLASS_TYPES.primaryButton}
+        btnClassType={BUTTON_CLASS_TYPES.primaryButton}
       >
         {children}
       </Button>

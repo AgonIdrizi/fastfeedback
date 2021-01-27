@@ -30,7 +30,9 @@ const SiteTable = ({ sites }) => {
             </Td>
             <Td>
               <TdText>
-                <Link href="">View Feedback</Link>
+                <Link href="/p/[siteId]" as={`/p/${site.id}`}>
+                  View Feedback
+                </Link>
               </TdText>
             </Td>
             <Td>
