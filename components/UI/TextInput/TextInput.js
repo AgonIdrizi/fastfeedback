@@ -6,7 +6,6 @@ const TextInput = ({
   // form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
-  console.log('field', props);
   return (
     <div className={`relative ${props.className}`}>
       <label htmlFor={field.name}>{capitalizeFirstLetter(field.name)}</label>

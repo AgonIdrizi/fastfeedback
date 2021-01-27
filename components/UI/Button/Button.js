@@ -21,6 +21,7 @@ const Button = ({
       type={btnType}
       onClick={onClick}
       className={` px-6 flex justify-center  items-center transition ease-in duration-200 ${btnClassType}`}
+      disabled={disabled}
     >
       {children}
     </button>

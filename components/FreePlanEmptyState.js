@@ -11,7 +11,7 @@ const FreePlanEmptyState = () => {
           Get feedback on your site instantly.
         </h2>
         <p className="mb-4">Start today, then grow with us 🌱</p>
-        <Button btnType={BUTTON_CLASS_TYPES.primaryButton}>
+        <Button btnClassType={BUTTON_CLASS_TYPES.primaryButton}>
           Upgrade to Starter
         </Button>
       </Card>
