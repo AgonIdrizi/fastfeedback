@@ -8,7 +8,6 @@ import Table, {
   TdText,
   TdStatus
 } from '@/components/UI/Table/Table';
-import { formatWithValidation } from 'next/dist/next-server/lib/utils';
 
 const SiteTable = ({ sites }) => {
   return (

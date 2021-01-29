@@ -6,7 +6,9 @@ export const BUTTON_CLASS_TYPES = {
   secondaryButton:
     'w-22 mt-4 rounded text-base font-medium text-gray-500 bg-gray-100 hover:bg-gray-200 py-2',
   successButton:
-    'w-22 bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm mt-4  py-2 rounded shadow hover:shadow-lg  hover:bg-green-600 outline-none focus:outline-none '
+    'w-22 bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm mt-4  py-2 rounded shadow hover:shadow-lg  hover:bg-green-600 outline-none focus:outline-none ',
+  dangerButton:
+    'bg-red-500 text-white hover:bg-red-600 focus:ring-red-400 focus:ring-offset-red-200 font-bold uppercase text-sm mt-4  py-2 rounded shadow'
 };
 
 const Button = ({
