@@ -11,6 +11,15 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center h-screen">
       <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (document.cookie && document.cookie.includes('fast-feedback-auth')) {
+              window.location.href = "/dashboard"
+            }
+          `
+          }}
+        />
         <title>Fast Feedback</title>
       </Head>
       <Logo />

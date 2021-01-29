@@ -1,17 +1,16 @@
 import React from 'react';
-import axios from 'axios';
+import { useAuth } from '@/lib/auth';
 import fetcher from '@/utils/fetcher';
 import { useQuery } from 'react-query';
 
-const fetchSites = () =>
-  axios
-    .get('/api/sites', {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then((res) => res);
-
 export default function useSites(token) {
-  return useQuery('sites', () => fetcher('/api/sites', token));
+  return useQuery(
+    token && 'sites',
+    () => fetcher('/api/sites', token),
+
+    {
+      onSuccess: () => console.log('Success'),
+      onError: () => console.log('Error')
+    }
+  );
 }

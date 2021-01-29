@@ -1,6 +1,4 @@
-import React from 'react';
-import useSWR from 'swr';
-
+import React, { useState } from 'react';
 import useSites from '@/hooks/useSites';
 import fetcher from '@/utils/fetcher';
 import Header from '@/components/Header';
@@ -13,7 +11,7 @@ import SiteTable from '@/components/SiteTable';
 const Dashboard = () => {
   const { user } = useAuth();
   const token = user ? user.ya : null;
-  console.log('user dashboard', user, token);
+
   const { data, error } = useSites(token);
 
   if (!data) {
