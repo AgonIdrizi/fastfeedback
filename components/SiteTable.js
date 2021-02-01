@@ -8,7 +8,6 @@ import Table, {
   TdText,
   TdStatus
 } from '@/components/UI/Table/Table';
-import { formatWithValidation } from 'next/dist/next-server/lib/utils';
 
 const SiteTable = ({ sites }) => {
   return (
@@ -31,7 +30,9 @@ const SiteTable = ({ sites }) => {
             <Td>
               <TdText>
                 <Link href="/p/[siteId]" as={`/p/${site.id}`}>
-                  View Feedback
+                  <span className="text-blue-400 font-semibold cursor-pointer hover:underline">
+                    View Feedback
+                  </span>
                 </Link>
               </TdText>
             </Td>

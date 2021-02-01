@@ -5,8 +5,8 @@ import { useQuery } from 'react-query';
 
 export default function useSites(token) {
   return useQuery(
-    token && 'sites',
-    () => fetcher('/api/sites', token),
+    token && 'feedback',
+    () => fetcher('/api/feedback', token),
 
     {
       onSuccess: () => console.log('Success'),

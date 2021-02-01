@@ -1,18 +1,13 @@
 import React from 'react';
 import Button, { BUTTON_CLASS_TYPES } from '@/components/UI/Button/Button';
-export default function Modal({
+
+const AlertDialog = ({
   showModal,
   setShowModal,
-  formRef,
+  handleDeleteFeedback,
   title,
   children
-}) {
-  const handleOkModal = () => {
-    formRef.current?.submitForm();
-    setShowModal(false);
-    console.log(formRef.current);
-  };
-
+}) => {
   return (
     <>
       {showModal ? (
@@ -23,7 +18,7 @@ export default function Modal({
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
-                  <h3 className="text-3xl font-semibold">{title}</h3>
+                  <h3 className="text-2xl font-semibold">{title}</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-2 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
@@ -33,8 +28,10 @@ export default function Modal({
                     </span>
                   </button>
                 </div>
-                {/*body*/}
-                <div className="relative p-6 flex-auto">{children}</div>
+
+                <div className="relative p-6 text-primary text-base font-medium flex-auto">
+                  {children}
+                </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t gap-4 border-solid border-gray-300 rounded-b">
                   <Button
@@ -44,11 +41,10 @@ export default function Modal({
                     Cancel
                   </Button>
                   <Button
-                    btnClassType={BUTTON_CLASS_TYPES.successButton}
-                    onClick={() => handleOkModal()}
-                    disabled={!formRef.current?.isValid}
+                    btnClassType={BUTTON_CLASS_TYPES.dangerButton}
+                    onClick={() => handleDeleteFeedback()}
                   >
-                    Save
+                    Delete
                   </Button>
                 </div>
               </div>
@@ -59,4 +55,6 @@ export default function Modal({
       ) : null}
     </>
   );
-}
+};
+
+export default AlertDialog;
