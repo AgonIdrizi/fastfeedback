@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
+import { useToasts } from 'react-toast-notifications';
 import TextInput from '@/components/UI/TextInput/TextInput';
 import ErrorMessage from '@/components/UI/ErrorMessage/ErrorMessage';
 import { getAllFeedback, getAllSites } from '@/lib/db-admin';
@@ -37,13 +39,13 @@ const schema = yup.object({
   comment: yup.string().required().min(3)
 });
 
-const SiteFeedback = ({ initialFeedback }) => {
+const SiteFeedback = ({ initialFeedback, siteId }) => {
   const auth = useAuth();
   const router = useRouter();
   const [allFeedback, setAllFeedback] = useState(initialFeedback);
+  const { addToast } = useToasts();
 
-  const handleCommentSubmit = ({ comment }) => {
-    console.log('auth', auth);
+  const handleCommentSubmit = async ({ comment }) => {
     const newFeedback = {
       author: auth.user.email,
       authorId: auth.user.uid,
@@ -53,9 +55,24 @@ const SiteFeedback = ({ initialFeedback }) => {
       provider: 'github.com', //to check why auth.user is not formated, and provider is not stored in auth.user
       status: 'pending'
     };
+    try {
+      const feedbackResponseData = await createFeedback(newFeedback);
 
-    setAllFeedback([newFeedback, ...allFeedback]);
-    createFeedback(newFeedback);
+      setAllFeedback([
+        { ...newFeedback, id: feedbackResponseData.id },
+        ...allFeedback
+      ]);
+
+      addToast('Feedback created', {
+        appearance: 'success',
+        autoDismiss: true
+      });
+    } catch (error) {
+      addToast('There was an error, please try again!', {
+        appearance: 'error',
+        autoDismiss: true
+      });
+    }
   };
   return (
     <div className="flex flex-col w-full  mt-0 mb-0 my-auto mx-auto max-w-4xl">

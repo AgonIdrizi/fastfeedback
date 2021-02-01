@@ -13,7 +13,6 @@ export default function Modal({
     console.log(formRef.current);
   };
 
-  //console.log(formRef.current?.submitForm());
   return (
     <>
       {showModal ? (

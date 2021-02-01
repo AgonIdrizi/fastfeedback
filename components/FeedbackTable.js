@@ -11,6 +11,9 @@ import Table, {
 } from '@/components/UI/Table/Table';
 
 const FeedbackTable = ({ allFeedback }) => {
+  function handleSwitchOnChange(checked, id) {
+    console.log(id);
+  }
   return (
     <Table>
       <thead>
@@ -36,15 +39,20 @@ const FeedbackTable = ({ allFeedback }) => {
             </Td>
             <Td>
               <Switch
-                onChange={() => {}}
-                defaultValue={feedback.status === 'active'}
-                checked={false}
+                onChange={() =>
+                  handleSwitchOnChange(
+                    feedback.status === 'active',
+
+                    feedback.id
+                  )
+                }
+                checked={feedback.status === 'active'}
+                checkedIcon={false}
+                uncheckedIcon={false}
               />
             </Td>
             <Td>
-              <TdText>
-                <RemoveButton />
-              </TdText>
+              <RemoveButton feedbackId={feedback.id} />
             </Td>
           </Tr>
         ))}

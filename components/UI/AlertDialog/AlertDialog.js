@@ -1,11 +1,13 @@
 import React from 'react';
 import Button, { BUTTON_CLASS_TYPES } from '@/components/UI/Button/Button';
 
-const AlertDialog = ({ showModal, setShowModal, formRef, title, children }) => {
-  const handleDelete = () => {
-    setShowModal(false);
-  };
-
+const AlertDialog = ({
+  showModal,
+  setShowModal,
+  handleDeleteFeedback,
+  title,
+  children
+}) => {
   return (
     <>
       {showModal ? (
@@ -16,7 +18,7 @@ const AlertDialog = ({ showModal, setShowModal, formRef, title, children }) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
-                  <h3 className="text-3xl font-semibold">{title}</h3>
+                  <h3 className="text-2xl font-semibold">{title}</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-2 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
@@ -26,8 +28,10 @@ const AlertDialog = ({ showModal, setShowModal, formRef, title, children }) => {
                     </span>
                   </button>
                 </div>
-                {/*body*/}
-                <div className="relative p-6 flex-auto">{children}</div>
+
+                <div className="relative p-6 text-primary text-base font-medium flex-auto">
+                  {children}
+                </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t gap-4 border-solid border-gray-300 rounded-b">
                   <Button
@@ -38,7 +42,7 @@ const AlertDialog = ({ showModal, setShowModal, formRef, title, children }) => {
                   </Button>
                   <Button
                     btnClassType={BUTTON_CLASS_TYPES.dangerButton}
-                    onClick={() => handleOkModal()}
+                    onClick={() => handleDeleteFeedback()}
                   >
                     Delete
                   </Button>
