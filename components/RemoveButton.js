@@ -18,12 +18,21 @@ const RemoveButton = ({ feedbackId }) => {
       deleteFeedback(id);
     },
     {
-      onSuccess: (data) => {
+      onSuccess: async () => {
         addToast('Feedback was removed', {
           appearance: 'success',
           autoDismiss: true
         });
-        queryClient.invalidateQueries('feedback');
+
+        await queryClient.cancelQueries('feedback');
+
+        const previousValue = queryClient.getQueryData('feedback');
+        queryClient.setQueryData('feedback', (old) => ({
+          ...old,
+          feedback: old.feedback.filter((item) => item.id !== feedbackId)
+        }));
+
+        return previousValue;
       },
 
       onError: () => {

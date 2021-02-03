@@ -1,21 +1,9 @@
 import React from 'react';
 import Button, { BUTTON_CLASS_TYPES } from '@/components/UI/Button/Button';
-export default function Modal({
-  showModal,
-  setShowModal,
-  formRef,
-  title,
-  children
-}) {
-  const handleOkModal = () => {
-    formRef.current?.submitForm();
-    setShowModal(false);
-    console.log(formRef.current);
-  };
-
+export default function Modal({ setShowModal, title, children }) {
   return (
     <>
-      {showModal ? (
+      {
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto modal-min-width max-w-1/4">
@@ -36,27 +24,13 @@ export default function Modal({
                 {/*body*/}
                 <div className="relative p-6 flex-auto">{children}</div>
                 {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t gap-4 border-solid border-gray-300 rounded-b">
-                  <Button
-                    btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
-                    onClick={(e) => setShowModal(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    btnClassType={BUTTON_CLASS_TYPES.successButton}
-                    onClick={() => handleOkModal()}
-                    disabled={!formRef.current?.isValid}
-                  >
-                    Save
-                  </Button>
-                </div>
+                <div className="flex items-center justify-end p-6 border-t gap-4 border-solid border-gray-300 rounded-b"></div>
               </div>
             </div>
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
-      ) : null}
+      }
     </>
   );
 }

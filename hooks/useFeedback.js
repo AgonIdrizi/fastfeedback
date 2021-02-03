@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 
 export default function useSites(token) {
   return useQuery(
-    token && 'feedback',
+    'feedback',
     () => fetcher('/api/feedback', token),
 
     {
