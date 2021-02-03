@@ -5,6 +5,7 @@ import { useQuery, useQueryClient } from 'react-query';
 
 export default function useSites(token) {
   const queryClient = useQueryClient();
+
   return useQuery(
     'sites',
     () => fetcher('/api/sites', token),
@@ -12,7 +13,9 @@ export default function useSites(token) {
     {
       onSuccess: (data) => {
         console.log('Success useSites', data);
-        //queryClient.setQueryData('sites', data);
+        if (data.error) {
+          queryClient.clear();
+        }
       },
       onError: () => console.log('Error')
     }
