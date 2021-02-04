@@ -13,11 +13,12 @@ export default function useSites(token) {
     {
       onSuccess: (data) => {
         console.log('Success useSites', data);
-        if (data.error) {
-          queryClient.clear();
-        }
       },
-      onError: () => console.log('Error')
+      onError: () => {
+        queryClient.clear();
+        console.log('Error');
+      },
+      retry: 1
     }
   );
 }
