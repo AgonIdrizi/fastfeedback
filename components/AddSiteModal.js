@@ -52,7 +52,7 @@ const AddSiteModal = ({ children }) => {
           const previousValue = queryClient.getQueryData('sites');
           queryClient.setQueryData('sites', (old) => ({
             ...old,
-            sites: [...old.sites, newItem]
+            sites: [newItem, ...old.sites]
           }));
 
           return previousValue;

@@ -5,6 +5,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate } from 'react-query/hydration';
 import '@/styles/globals.css';
 import '@/styles/tailwind.css';
+import { DefaultSeo } from 'next-seo';
+import SEO from 'next-seo.config';
 
 const queryClient = new QueryClient();
 
@@ -13,6 +15,7 @@ function MyApp({ Component, pageProps }) {
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <ToastProvider>
+          <DefaultSeo {...SEO} />
           <Component {...pageProps} />
         </ToastProvider>
         <ReactQueryDevtools initialIsOpen={false} />

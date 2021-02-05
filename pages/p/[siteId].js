@@ -31,7 +31,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths,
-    fallback: false
+    fallback: true
   };
 }
 
@@ -102,7 +102,7 @@ const SiteFeedback = ({ initialFeedback, siteId }) => {
               }
               btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
               btnType="submit"
-              disabled={!props.isValid}
+              disabled={router.isFallback || !props.isValid}
             >
               Add comment
             </Button>
