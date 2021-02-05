@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Switch from 'react-switch';
+import Badge, { badgeTypes } from '@/components/UI/Badge/Badge';
 import RemoveButton from '@/components/RemoveButton';
 import Table, {
   Td,
@@ -11,8 +12,12 @@ import Table, {
 } from '@/components/UI/Table/Table';
 
 const FeedbackTable = ({ allFeedback }) => {
-  function handleSwitchOnChange(checked, id) {
-    console.log(id);
+  function selectBadgeType(status) {
+    status === 'active'
+      ? badgeTypes.success
+      : status === 'pending'
+      ? badgeTypes.pending
+      : badgeTypes.refused;
   }
   return (
     <Table>
@@ -28,7 +33,7 @@ const FeedbackTable = ({ allFeedback }) => {
       <tbody>
         {allFeedback.map((feedback) => (
           <Tr key={feedback.id}>
-            <Td TailwindClasses="font-medium">{feedback.name}</Td>
+            <Td TailwindClasses="font-medium">{feedback.author}</Td>
             <Td>
               <TdText>{feedback.text}</TdText>
             </Td>
@@ -38,18 +43,17 @@ const FeedbackTable = ({ allFeedback }) => {
               </TdText>
             </Td>
             <Td>
-              <Switch
-                onChange={() =>
-                  handleSwitchOnChange(
-                    feedback.status === 'active',
-
-                    feedback.id
-                  )
+              <Badge
+                type={
+                  feedback.status === 'active'
+                    ? badgeTypes.success
+                    : feedback.status == 'pending'
+                    ? badgeTypes.pending
+                    : badgeTypes.refused
                 }
-                checked={feedback.status === 'active'}
-                checkedIcon={false}
-                uncheckedIcon={false}
-              />
+              >
+                {feedback.status}
+              </Badge>
             </Td>
             <Td>
               <RemoveButton feedbackId={feedback.id} />

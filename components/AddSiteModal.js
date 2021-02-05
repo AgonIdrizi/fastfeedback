@@ -28,35 +28,47 @@ const AddSiteModal = ({ children }) => {
   const { addToast } = useToasts();
   const formRef = useRef();
   const queryClient = useQueryClient();
-  const mutation = useMutation(
-    (createSiteData) => {
-      return createSite(createSiteData);
-    },
-    {
-      onSuccess: () => {
-        addToast('Site was added succesfully', {
-          appearance: 'success',
-          autoDismiss: true
-        });
-        queryClient.invalidateQueries('sites');
-      },
-      onError: () => {
-        addToast('Ops there was an error, try again', {
-          appearance: 'error',
-          autoDismiss: true
-        });
-      }
-    }
-  );
+  const addMutation = useMutation((createSiteData) => {
+    return createSite(createSiteData);
+  });
 
-  const handleSubmitForm = ({ site, link }) => {
-    mutation.mutateAsync({
-      authorId: auth.user?.uid,
-      createdAt: new Date().toISOString(),
-      site,
-      url: link
-    });
+  const handleSubmitForm = (e, values) => {
+    e.preventDefault();
+
+    addMutation.mutate(
+      {
+        authorId: auth.user?.uid,
+        createdAt: new Date().toISOString(),
+        site: values.site,
+        url: values.link
+      },
+      {
+        onSuccess: async (newItem) => {
+          addToast('Site was added succesfully', {
+            appearance: 'success',
+            autoDismiss: true
+          });
+          await queryClient.cancelQueries('sites');
+          const previousValue = queryClient.getQueryData('sites');
+          queryClient.setQueryData('sites', (old) => ({
+            ...old,
+            sites: [newItem, ...old.sites]
+          }));
+
+          return previousValue;
+        },
+        onError: (err, newSite, context) => {
+          queryClient.setQueryData('sites', context.previousSites);
+          addToast('Ops there was an error, try again', {
+            appearance: 'error',
+            autoDismiss: true
+          });
+        }
+      }
+    );
+    setShowModal(false);
   };
+
   return (
     <>
       <Button
@@ -66,40 +78,55 @@ const AddSiteModal = ({ children }) => {
         {children}
       </Button>
 
-      <Modal
-        showModal={showModal}
-        formRef={formRef}
-        setShowModal={setShowModal}
-        title="Add Site"
-      >
-        <Formik
-          validationSchema={schema}
-          initialValues={{ site: '', link: '' }}
-          onSubmit={(values) => handleSubmitForm(values)}
-          innerRef={formRef}
+      {showModal && (
+        <Modal
+          setShowModal={setShowModal}
+          formRef={formRef}
+          setShowModal={setShowModal}
+          title="Add Site"
         >
-          {(props) => (
-            <Form>
-              <Field
-                id="site"
-                label="Site"
-                name="site"
-                placeholder="My site"
-                component={TextInput}
-              />
-              <ErrorMessage name="site" />
-              <Field
-                id="link"
-                label="Link"
-                name="link"
-                placeholder="https://website.com"
-                component={TextInput}
-              />
-              <ErrorMessage name="link" />
-            </Form>
-          )}
-        </Formik>
-      </Modal>
+          <Formik
+            validationSchema={schema}
+            initialValues={{ site: '', link: '' }}
+          >
+            {(props) => (
+              <Form>
+                <Field
+                  id="site"
+                  label="Site"
+                  name="site"
+                  placeholder="My site"
+                  component={TextInput}
+                />
+                <ErrorMessage name="site" />
+                <Field
+                  id="link"
+                  label="Link"
+                  name="link"
+                  placeholder="https://website.com"
+                  component={TextInput}
+                />
+                <ErrorMessage name="link" />
+                <div className="flex flex-row justify-end">
+                  <Button
+                    btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
+                    onClick={(e) => setShowModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    btnClassType={BUTTON_CLASS_TYPES.successButton}
+                    onClick={(e) => handleSubmitForm(e, props.values)}
+                    btnType="submit"
+                  >
+                    Save
+                  </Button>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </Modal>
+      )}
     </>
   );
 };

@@ -11,7 +11,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   const token = user ? user.ya : null;
 
-  const { data, error } = useSites(token);
+  const { data } = useSites(token);
 
   if (!data) {
     return (

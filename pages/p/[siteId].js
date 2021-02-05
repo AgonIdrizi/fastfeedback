@@ -18,7 +18,8 @@ export async function getStaticProps(context) {
   return {
     props: {
       initialFeedback: feedback
-    }
+    },
+    revalidate: 1
   };
 }
 
@@ -45,12 +46,14 @@ const SiteFeedback = ({ initialFeedback, siteId }) => {
   const [allFeedback, setAllFeedback] = useState(initialFeedback);
   const { addToast } = useToasts();
 
-  const handleCommentSubmit = async ({ comment }) => {
+  const handleCommentSubmit = async (e, values, resetForm) => {
+    e.preventDefault();
+
     const newFeedback = {
       author: auth.user.email,
       authorId: auth.user.uid,
       siteId: router.query.siteId,
-      text: comment,
+      text: values.comment,
       createdAt: new Date().toISOString(),
       provider: 'github.com', //to check why auth.user is not formated, and provider is not stored in auth.user
       status: 'pending'
@@ -68,11 +71,13 @@ const SiteFeedback = ({ initialFeedback, siteId }) => {
         autoDismiss: true
       });
     } catch (error) {
+      console.log(error);
       addToast('There was an error, please try again!', {
         appearance: 'error',
         autoDismiss: true
       });
     }
+    resetForm();
   };
   return (
     <div className="flex flex-col w-full  mt-0 mb-0 my-auto mx-auto max-w-4xl">
@@ -93,10 +98,12 @@ const SiteFeedback = ({ initialFeedback, siteId }) => {
             />
             <ErrorMessage name="comment" />
             <Button
-              onClick={() => {}}
+              onClick={(e) =>
+                handleCommentSubmit(e, props.values, props.resetForm)
+              }
               btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
               btnType="submit"
-              disabled={!props.isValid}
+              disabled={router.isFallback || !props.isValid}
             >
               Add comment
             </Button>
