@@ -107,18 +107,21 @@ const AddSiteModal = ({ children }) => {
                   component={TextInput}
                 />
                 <ErrorMessage name="link" />
-                <Button
-                  btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
-                  onClick={(e) => setShowModal(false)}
-                >
-                  Cancel
-                </Button>
-                <button
-                  onClick={(e) => handleSubmitForm(e, props.values)}
-                  type="submit"
-                >
-                  Save
-                </button>
+                <div className="flex flex-row justify-end">
+                  <Button
+                    btnClassType={BUTTON_CLASS_TYPES.secondaryButton}
+                    onClick={(e) => setShowModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    btnClassType={BUTTON_CLASS_TYPES.successButton}
+                    onClick={(e) => handleSubmitForm(e, props.values)}
+                    btnType="submit"
+                  >
+                    Save
+                  </Button>
+                </div>
               </Form>
             )}
           </Formik>
